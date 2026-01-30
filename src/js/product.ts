@@ -3,6 +3,7 @@ import { getLocalStorage, setLocalStorage } from "./utils.mts";
 import { findProductById } from "./productData.mts";
 
 function addProductToCart(product: Product) {
+  console.log(product);
   let cart = [];
   try {
     cart = getLocalStorage("so-cart") || [];
