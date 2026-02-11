@@ -296,3 +296,7 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.product-list__icon {
+  width: 100px;
+}
