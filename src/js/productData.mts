@@ -9,8 +9,11 @@ function convertToJson(res:Response) {
   }
 }
 
-export function getData(category = "tents") {  
-  return fetch(`../json/${category}.json`)
+export function getProductData(params: string) {  
+  if (!params) {
+    params = ""; //Subject to change
+  }
+  return fetch(`${baseURL}/products/${params}`)
     .then(convertToJson)
     .then((data) => data);
 }

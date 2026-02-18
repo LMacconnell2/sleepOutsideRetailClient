@@ -1,6 +1,7 @@
 ---
 let {title} = Astro.props;
 import '../css/style.css';
+import UserMenu from '../js/components/UserMenu.svelte';
 ---
 
 <!doctype html>
@@ -18,7 +19,8 @@ import '../css/style.css';
       </div>
       <nav class="menu-right">
         <div class="user-menu-container">
-          <div class="user">
+          <UserMenu client:load/>
+          <!-- <div class="user">
             <button
               class="user__button"
               aria-label="user management"
@@ -31,7 +33,7 @@ import '../css/style.css';
               <a href="/profile">Profile</a>
               <a href="/orders">Orders</a>
             </nav>
-          </div>
+          </div> -->
         </div>
         <div class="cart">
           <a
