@@ -9,11 +9,11 @@ function convertToJson(res:Response) {
   }
 }
 
-export function getProducts(params: string) {  
+export function getProductData(params: string) {  
   if (!params) {
     params = ""; //Subject to change
   }
-  return fetch(`http://localhost:3000/api/v1/products/${params}`)
+  return fetch(`${baseURL}/products/${params}`)
     .then(convertToJson)
     .then((data) => data);
 }
