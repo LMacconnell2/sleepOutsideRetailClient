@@ -1,0 +1,33 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Profile from "../../components/Profile.svelte";
+import { userStore, logout } from "../../js/auth.svelte.ts";
+
+const baseURL = import.meta.env.PUBLIC_BASE_URL || "http://localhost:3000/api/v1/";
+
+const title = "Profile";
+
+async function getProfile() {
+    console.log(userStore.token);
+    const res = await fetch(`${baseURL}/users/protected`, {
+      method: "GET",
+      headers: {
+        // This is how we pass our token to the server for protected routes.
+        Authorization: `Bearer ${userStore.token}`
+      }
+    });
+    if (res.ok) {
+      return res.json();
+    } else {
+      // if we get an error back...it means there is something wrong with our token and we should log the user out.
+      logout();
+      window.location.href = `/login/?redirect=${window.location.pathname}`;
+    }
+  }
+---
+
+<Layout title={title}>
+  <section class="profile">
+    <Profile client:load/>
+  </section>
+</Layout>

@@ -5,5 +5,7 @@
   "compilerOptions": {
     "module": "es2022",
     "target": "es2022",
+    "jsx": "preserve",
+    "jsxImportSource": "svelte",
   }
 }

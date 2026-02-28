@@ -49,7 +49,7 @@
   </button>
   
   <nav class="user__menu" class:open={visible}>
-    <a href="#">Login</a>
+    <a href="/login">Login</a>
     <a href="#">Profile</a>
     <a href="#">Orders</a>
   </nav>
