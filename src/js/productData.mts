@@ -19,7 +19,7 @@ export function getProductData(params: string) {
 }
 
 export async function findProductById(id:string) {
-  const response = await fetch(baseURL + `products/${id}`);
+  const response = await fetch(baseURL + `/products/${id}`);
   const product = await convertToJson(response) as Product;
   console.log(product)
   return product;
