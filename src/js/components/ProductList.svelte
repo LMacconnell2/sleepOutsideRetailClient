@@ -15,7 +15,7 @@
     onMount(init);
 </script>
 
-<h2>Top Products: {category}</h2>
+<h2>Top Products For: {category}</h2>
 
 <ul class="product-list">
     {#each products as product}

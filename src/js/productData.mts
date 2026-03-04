@@ -13,7 +13,7 @@ export function getProductData(params: string) {
   if (!params) {
     params = ""; //Subject to change
   }
-  return fetch(`${baseURL}/products/${params}`)
+  return fetch(`${baseURL}/products?category=${params}`)
     .then(convertToJson)
     .then((data) => data);
 }
