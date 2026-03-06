@@ -1,6 +1,7 @@
 import type { Product } from "./types.mts";
 import { getLocalStorage, setLocalStorage } from "./utils.mts";
 import { findProductById } from "./productData.mts";
+import cartItems from "../lib/cart.svelte";
 
 function addProductToCart(product: Product) {
   console.log(product);
@@ -17,6 +18,7 @@ function addProductToCart(product: Product) {
   }
   cart.push(product);
   setLocalStorage("so-cart", cart);
+  cartItems.addItem(product);
 }
 
 // add to cart button event handler

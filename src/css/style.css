@@ -186,6 +186,11 @@ button {
   fill: gray;
 }
 
+.cart:hover .cart-superscript {
+  background-color: rgb(225, 158, 103);
+  color: rgb(178, 90, 189);
+}
+
 /* End cart icon styles */
 
 .mission {
