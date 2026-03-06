@@ -2,6 +2,7 @@
 let {title} = Astro.props;
 import '../css/style.css';
 import CartLogo from '../components/CartLogo.svelte';
+import UserMenu from '../js/components/UserMenu.svelte';
 ---
 
 <!doctype html>
@@ -10,6 +11,7 @@ import CartLogo from '../components/CartLogo.svelte';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sleep Outside | {title}</title>
+    <script src="../js/main.ts"></script>
   </head>
   <body>
     <header class="divider">
@@ -19,7 +21,8 @@ import CartLogo from '../components/CartLogo.svelte';
       </div>
       <nav class="menu-right">
         <div class="user-menu-container">
-          <div class="user">
+          <UserMenu client:load/>
+          <!-- <div class="user">
             <button
               class="user__button"
               aria-label="user management"
@@ -32,7 +35,7 @@ import CartLogo from '../components/CartLogo.svelte';
               <a href="/profile">Profile</a>
               <a href="/orders">Orders</a>
             </nav>
-          </div>
+          </div> -->
         </div>
         <div class="cart">
           <a

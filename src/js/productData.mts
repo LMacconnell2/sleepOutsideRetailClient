@@ -9,14 +9,17 @@ function convertToJson(res:Response) {
   }
 }
 
-export function getData(category = "tents") {  
-  return fetch(`../json/${category}.json`)
+export function getProductData(params: string) {  
+  if (!params) {
+    params = ""; //Subject to change
+  }
+  return fetch(`${baseURL}/products/${params}`)
     .then(convertToJson)
     .then((data) => data);
 }
 
 export async function findProductById(id:string) {
-  const response = await fetch(baseURL + `products/${id}`);
+  const response = await fetch(baseURL + `/products/${id}`);
   const product = await convertToJson(response) as Product;
   console.log(product)
   return product;
