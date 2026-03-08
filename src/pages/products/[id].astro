@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { type CollectionEntry, getCollection } from "astro:content";
+import { calcDiscount } from "../../js/pricing.ts";
 
 // map though all products to create a page for each one
 export async function getStaticPaths() {
@@ -8,43 +9,58 @@ export async function getStaticPaths() {
 
   return products.map((product) => ({
     params: { id: product.id },
-    props: product
+    props: product,
   }));
 }
+
 type Props = CollectionEntry<"products">;
 
 // get the product data from the props to use in the template below. The actual data is in product.data
-const product = Astro.props;
-const title = product.data.name;
 
+const product = Astro.props;
+const discount = calcDiscount(
+  product.data.suggestedRetailPrice,
+  product.data.finalPrice,
+);
+const title = product.data.name;
 ---
+
 <Layout title={title}>
   <script src="../../js/product.ts"></script>
-  
-        <main class="divider">
-      <section class="product-detail">
-        <h3>{product.data.brand.name}</h3>
 
-        <h2 class="divider">{product.data.nameWithoutBrand}</h2>
+  <main class="divider">
+    <section class="product-detail">
+      <h3>{product.data.brand.name}</h3>
 
-        <img
-          class="divider"
-          src=`${product.data.images.primaryMedium}`
-          alt="Marmot Ajax tent"
-        />
+      <h2 class="divider">{product.data.nameWithoutBrand}</h2>
 
-        <p class="product-card__price">{product.data.finalPrice}</p>
+      <img
+        class="divider"
+        src=`${product.data.images.primaryMedium}`
+        alt="Marmot Ajax tent"
+      />
 
-        <p class="product__color">{product.data.colors.colorName}</p>
+      <p class="product-card__price">
+        ${product.data.finalPrice}
 
-        <p class="product__description">
-          {product.data.HtmlSimple}
-        </p>
+        {
+          discount && (
+            <span class="product__discount">
+               {discount.percent}% (<s>${product.data.suggestedRetailPrice}</s>)
+            </span>
+          )
+        }
+      </p>
 
-        <div class="product-detail__add">
-          <button id="addToCart" data-id={product.data.id}>Add to Cart</button>
-        </div>
-      </section>
-    </main>
-  
+      <p class="product__color">{product.data.colors.colorName}</p>
+
+      <p class="product__description">
+        {product.data.HtmlSimple}
+      </p>
+
+      <div class="product-detail__add">
+        <button id="addToCart" data-id={product.data.id}>Add to Cart</button>
+      </div>
+    </section>
+  </main>
 </Layout>
